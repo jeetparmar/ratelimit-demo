@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  forward-headers-strategy: native
+
+spring:
+  application:
+    name: ratelimit-demo
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 200ms
+
+ratelimit:
+  capacity: ${RATELIMIT_CAPACITY:10}          # max burst
+  refill-per-sec: ${RATELIMIT_REFILL:2}       # sustained rate
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
